@@ -7,3 +7,4 @@ COPY --from=1password/op:2-beta /usr/local/bin/op /usr/local/bin/
 COPY cron-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT [ "/usr/local/bin/cron-entrypoint.sh" ]
+CMD [ "crond",  "-f", "-l", "6", "-L", "/dev/stdout" ]
