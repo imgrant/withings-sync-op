@@ -11,5 +11,5 @@ if op_item=$(op item get "$OP_ITEM" --vault "$OP_VAULT" --fields username,passwo
   export GARMIN_PASSWORD=$(echo "$op_item"|cut -d',' -f2)
 fi
 
-# Hand off to the Docker CMD parameter
-eval $1
+# Hand off by executing passthrough args
+eval "$@"
