@@ -1,4 +1,5 @@
 #!/bin/sh
-/usr/local/bin/gc_creds_from_1p.sh
-echo "$(( $RANDOM % 59 +0 )) */3 * * * withings-sync --garmin-username $GARMIN_USERNAME --garmin-password $GARMIN_PASSWORD | tee -a /root/withings-sync.log" > /etc/crontabs/root
+OP_ITEM="${OP_ITEM:=Garmin Connect}"
+OP_VAULT="${OP_VAULT:=Automation}"
+echo "$(( $RANDOM % 59 +0 )) */3 * * * withings-sync --garmin-username $(op read "op://$OP_VAULT/$OP_ITEM/username") --garmin-password $(op read "op://$OP_VAULT/$OP_ITEM/password") | tee -a /root/withings-sync.log" > /etc/crontabs/root
 crond -f -l 6 -L /dev/stdout
